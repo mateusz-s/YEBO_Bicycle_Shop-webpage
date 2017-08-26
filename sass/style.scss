@@ -42,6 +42,13 @@ body {
     font-family: $main-font-family;
 }
 
+h1, h2 {
+	padding-top: 60px;
+	margin-top: 0;
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+
 h2 {
     font: {
         size: 1.8rem;
@@ -79,10 +86,6 @@ img {
 }
 
 /* === ADDITIONAL STYLES === */
-.img-large {
-    width: 100%;
-}
-
 .pos-rel {
     position: relative;
 }
@@ -99,17 +102,36 @@ img {
     background-color: $pin-icon-bg-color;
 }
 
+.img-large {
+    width: 100%;
+}
+
+@each $icon in chain, fork, frame, gear {
+	.icon-#{$icon} {
+		background-image: url('../img/icon-#{$icon}.png');
+	}
+}
+
+/* === GRID SYSTEM STYLES === */
+.container-fluid {
+	padding: 0;
+}
 
 /* === MAIN-PAGE HEADER STYLES === */
-.main-page-header {
-    background-image: url('../img/header-bg-img.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    @media (min-width: $break-sm) {
-        height: 85vh;
-    }
-    .page-navbar {
+.page {
+	&-header {
+		padding: 0;
+		border: 0;
+		margin: 0;
+		background-image: url('../img/header-bg-img.jpg');
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		@media (min-width: $break-sm) {
+			height: 85vh;
+		}
+	}
+    &-navbar {
         padding: 155px 0 35px;
         position: relative;
         @media (max-width: $break-sm - 1) {
@@ -119,23 +141,20 @@ img {
             padding-top: 35px;
         }
     }
-    .page-nav {
+    &-nav {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 0;
         margin: 0;
         list-style-type: none;
-//        @media (max-width: $break-sm - 1) {
-//            background-color: $page-navbar-bg-color;
-//        }
         @media (min-width: $break-sm) {
             flex-direction: row;
             justify-content: center;
             align-items: center;
         }
     }
-    .page-nav-link {
+    &-nav-link {
         display: block;
         padding: 30px;
         font: {
@@ -150,7 +169,7 @@ img {
             color: $hover-color;
         }
     }
-    .page-logo {
+    &-logo {
         padding: 0;
         position: absolute;
         top: 35px;
@@ -162,20 +181,6 @@ img {
             transform: none;
         }
     }
-    #nav-icon {
-        display: none;
-    }
-    label[for="nav-icon"] {
-        display: none;
-//        position: absolute;
-//        top: 50px;
-//        right: 20px;
-//        font-size: 2.5rem;
-//        color: $text-color-1;
-//        @media (max-width: $break-sm - 1) {
-//            display: block;
-//        }
-    }
 }
 
 /* === ABOUT-US SECTION STYLES === */
@@ -183,10 +188,10 @@ img {
     padding: 130px 0;
     background-color: $section-bg-color;
     text-align: center;
-    & &-heading {
+    &-heading {
         @extend h2;
     }
-    & &-paragraph {
+    &-paragraph {
         margin: 35px 0 0;
     }
 }
@@ -205,18 +210,18 @@ img {
     .main-bike-foto {
         @extend .pos-rel;
     }
-    & &-logos {
+    &-logos {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
     }
-    & &-content {
+    &-content {
         position: relative;
         padding-top: 112.46446%;
-        overflow: hidden; // ?
+        overflow: hidden;
     }
-    & &-item {
+    &-item {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -226,56 +231,55 @@ img {
         width: 100%;
         height: 100%;
         text-align: justify;
-        overflow-y: scroll; // ?
+        overflow-y: scroll;
     }
-    & &-text {
+    &-text {
         padding: 12.6279%;
-        padding-bottom: 0;
+        padding-bottom: 30px;
     }
-    & &-heading {
+    &-heading {
         text-align: center;
     }
-    & &-paragraph {
+    &-paragraph {
         font: {
             size: 1.6rem;
             weight: $regular;
         }
         line-height: 3rem;
-        &:after {
+        &::after {
             content: '';
-            display: block; //none;
+            display: block;
             width: 50px;
             height: 1px;
             background-color: $work-paragraph-after-bg-color;
             margin: 9.65419% auto 0;
-//            @media (min-width: $break-lg) {
-//                display: block;
-//            }
         }
     }
     .extra-bike-foto {
         @extend .pos-rel;
-    }
-    .foto-arrow {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translate(-50%,0);
+		&::before {
+			content: '';
+			display: block;
+			width: 100%;
+			height: 10px;
+			background: url('../img/arrow.png') center top no-repeat;
+			position: absolute;
+		}
     }
 }
 
 /* === TESTIMONIALS SECTION STYLES === */
 .testimonials {
     background-color: $section-bg-color;
-    & &-item {
+    &-item {
         padding: 130px 0;
         text-align: center;
     }
-    & &-tt-icon {
+    &-tt-icon {
         color: $testimonials-tt-icon-color;
         font-size: 2.7rem;
     }
-    & &-tt-heading {
+    &-tt-heading {
         display: block;
         margin: 30px 0;
         font-size: 1.8rem;
@@ -285,7 +289,7 @@ img {
             color: $text-color-1;
         }
     }
-    & &-paragraph {
+    &-paragraph {
         padding: 0 20px;
         font-size: 2.4rem;
         font-style: italic;
@@ -301,16 +305,13 @@ img {
 
 /* === SHOP SECTION STYLES === */
 .shop {
-    .container-fluid {
-        padding: 0;
-    }
     .row {
         margin: 0;
     }
     [class^="col-"] {
         padding: 0;
     }
-    & &-item {
+    &-item {
         position: relative;
         cursor: pointer;
         overflow: hidden;
@@ -319,7 +320,7 @@ img {
             transform: none;
         }
     }
-    & &-layer {
+    &-layer {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -333,7 +334,7 @@ img {
         transform: translate(0, 100%);
         transition: all .3s;
     }
-    & &-layer-text {
+    &-layer-text {
         font: {
             size: 1.4rem;
             weight: $bold;
@@ -342,12 +343,12 @@ img {
         letter-spacing: 2px;
         color: $text-color-3;
     }
-    & &-btn-container {
+    &-btn-container {
         padding: 75px 0;
         text-align: center;
         background-color: $shop-btn-container-bg-color;
     }
-    & &-btn {
+    &-btn {
         width: 80%;
         height: 50px;
         border: 1px solid $shop-btn-bor-color;
@@ -374,7 +375,7 @@ img {
 .newsletter {
     padding: 110px 0;
     text-align: center;
-    & &-paragraph {
+    &-paragraph {
         margin: 40px 0;
         font: {
             size: 2.4rem;
@@ -382,7 +383,7 @@ img {
         }
         line-height: 3.4rem;
     }
-    & &-input {
+    &-input {
         width: 75%;
         height: 70px;
         padding: 20px 30px;
@@ -401,12 +402,11 @@ img {
             width: 400px;
         }
     }
-    & &-btn {
+    &-btn {
         width: 20%;
         height: 70px;
-        border: 0;
+        border: 1px solid transparent;
         margin-left: 4px;
-        margin-top: 5px;
         font: {
             size: 2.4rem;
             weight: $light;
@@ -415,6 +415,12 @@ img {
         vertical-align: bottom;
         color: $text-color-3;
         background-color: $newsletter-btn-bg-color;
+		transition: all .3s;
+		&:hover {
+			border-color: $hover-color;
+			color: $hover-color;
+			background-color: $text-color-3;
+		}
         @media (min-width: $break-sm) {
             width: 125px;
         }
@@ -422,16 +428,10 @@ img {
 }
 
 /* === MAIN-PAGE FOOTER STYLES === */
-.main-page-footer {
+.page-footer {
     padding: 100px 0;
     color: $text-color-2;
     background-color: $section-bg-color;
-//    & &-content {
-//        display: flex;
-//        justify-content: space-between;
-//        align-items: center;
-//        flex-wrap: wrap;
-//    }
     address {
         margin: 0;
         font-style: italic;
@@ -495,15 +495,3 @@ img {
         }
     }
 }
-
-/* === MEDIA QUERIES STYLES === */
-//@media (max-width: $break-sm - 1) {
-//    #nav-icon:checked ~ ul {
-//        //display: block;
-//        visibility: visible;
-//    }
-//    #nav-icon:not(:checked) ~ ul {
-//        //display: none;
-//        visibility: hidden;
-//    }
-//}
